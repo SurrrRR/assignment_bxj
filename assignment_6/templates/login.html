@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+ <div class="std_form">
+       {% if current_user.is_authenticated %}
+       <h1>您已经登陆咯!</h1>
+       {% else %}
+       <form action="/login" method="POST">
+           <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" class="form-control" placeholder="请输入用户名" name="username">
+          </div> 
+          <div class="form-group">
+          <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" placeholder="请输入密码" name="password">
+          </div>
+          <button type="submit" class="btn btn-primary">提交</button>
+       </form>
+       {% endif %}
+       {% with messages = get_flashed_messages() %}
+        {% if messages %}
+             {% for message in messages %}
+                <div class="alert alert-warning" role="alert">
+                    <h3>{{ message }}</h3>
+                </div>
+             {% endfor %}
+        {% endif %}
+        {% endwith %}
+ </div>
+{% endblock %}
